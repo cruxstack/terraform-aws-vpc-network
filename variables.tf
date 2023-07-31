@@ -123,8 +123,8 @@ variable "vpc_flow_logs_destination_type" {
   default     = "s3"
 
   validation {
-    condition = contains(["cloud-watch-logs", "s3"], lower(var.vpc_flow_logs_destination_type))
-    message   = "Must be either `cloud-watch-logs` or `s3`."
+    condition     = contains(["cloud-watch-logs", "s3"], lower(var.vpc_flow_logs_destination_type))
+    error_message = "Must be either `cloud-watch-logs` or `s3`."
   }
 }
 
