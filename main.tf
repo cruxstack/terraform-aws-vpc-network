@@ -28,8 +28,10 @@ locals {
       name                = lower(v)
       policy              = null
       private_dns_enabled = true
-      security_group_ids  = try([module.privatelink_vpc_endpoint_sg[local.privatelink_vpc_endpoint_sg_key].id], [])
-      subnet_ids          = module.subnets.private_subnet_ids
+      security_group_ids = local.privatelink_vpc_endpoints_enabled ? [
+        module.privatelink_vpc_endpoint_sg[local.privatelink_vpc_endpoint_sg_key].id
+      ] : []
+      subnet_ids = module.subnets.private_subnet_ids
     }
   }
 }
