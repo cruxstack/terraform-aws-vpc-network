@@ -76,7 +76,7 @@ output "vpc_default_security_group_id" {
 # ---------------------------------------------------------------------- nat ---
 
 output "nat_ids" {
-  value       = coalescelist(module.subnets.nat_gateway_ids, module.subnets.nat_instance_ids)
+  value       = try(coalescelist(module.subnets.nat_gateway_ids, module.subnets.nat_instance_ids), [])
   description = "IDs of the NAT Gateways."
 }
 
