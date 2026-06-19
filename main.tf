@@ -46,7 +46,7 @@ data "aws_region" "current" {
 
 module "vpc" {
   source  = "cloudposse/vpc/aws"
-  version = "2.1.0"
+  version = "3.0.0"
 
   ipv4_primary_cidr_block          = var.vpc_ipv4_cidr
   assign_generated_ipv6_cidr_block = var.vpc_ipv6_cidr_auto_assigned
@@ -59,7 +59,7 @@ module "vpc" {
 
 module "subnets" {
   source  = "cloudposse/dynamic-subnets/aws"
-  version = "2.4.1"
+  version = "3.1.1"
 
   availability_zones              = var.availability_zones
   availability_zone_ids           = var.availability_zone_ids
@@ -86,7 +86,7 @@ module "privatelink_vpc_endpoint_sg" {
   for_each = local.privatelink_vpc_endpoints_enabled ? toset([local.privatelink_vpc_endpoint_sg_key]) : []
 
   source  = "cloudposse/security-group/aws"
-  version = "2.1.0"
+  version = "2.2.0"
 
   create_before_destroy      = true
   preserve_security_group_id = false
@@ -112,7 +112,7 @@ module "privatelink_vpc_endpoint_sg" {
 
 module "privatelink_vpc_endpoints" {
   source  = "cloudposse/vpc/aws//modules/vpc-endpoints"
-  version = "2.1.0"
+  version = "3.0.0"
 
   enabled                 = local.privatelink_enabled
   vpc_id                  = module.vpc.vpc_id
